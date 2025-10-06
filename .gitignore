@@ -1,0 +1,69 @@
+# ========================
+# 🧠 GLOBAL SETTINGS
+# ========================
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore local environment files
+.env
+.env.*.local
+.env.local
+
+# Ignore logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore IDE/editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ========================
+# ⚙️ LARAVEL BACKEND
+# ========================
+backend/vendor/
+backend/node_modules/
+backend/public/storage
+backend/storage/*.key
+backend/storage/framework/*
+backend/storage/logs/*
+backend/.phpunit.result.cache
+
+# Composer dependencies
+composer.lock
+
+# Laravel cache files
+bootstrap/cache/*.php
+
+# ========================
+# ⚛️ FRONTEND (React/Next.js)
+# ========================
+frontend/node_modules/
+frontend/.next/
+frontend/.nuxt/
+frontend/out/
+frontend/dist/
+frontend/.vercel/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# ========================
+# 🔒 MISC
+# ========================
+# Ignore deployment or OS specific stuff
+*.bak
+*.tmp
+*.swp
+*.swo
+
+# Local testing or temporary files
+temp/
+tmp/
