@@ -1,5 +1,7 @@
 import { Poppins  } from "next/font/google";
 import "./globals.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Toaster } from "react-hot-toast";
 
 
 const poppins = Poppins({
@@ -15,10 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
+      <body suppressHydrationWarning
         className={poppins.className}
       >
-        {children}
+       <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+          {children}
+          <Toaster position="top-right" reverseOrder={false} />
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

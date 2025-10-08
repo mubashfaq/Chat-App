@@ -1,6 +1,9 @@
 "use client"
 import { useMemo, useState } from "react"
 import Link from "next/link"
+import { logout } from "@/lib/AuthApi"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation";
 
 // type SidebarProps = {
 //   activeChat: string
@@ -10,31 +13,48 @@ import Link from "next/link"
 // type Room = { id: string; name: string; last: string; unread?: number }
 
 export function ChatSidebar() {
-//   const rooms = useMemo<Room[]>(
-//     () => [
-//       { id: "general", name: "General", last: "Theme ready. Ship chat next!", unread: 2 },
-//       { id: "support", name: "Support", last: "Let us know if you need help." },
-//       { id: "random", name: "Random", last: "Friday memes dropping soon." },
-//     ],
-//     [],
-//   )
-//   const [q, setQ] = useState("")
+  const router = useRouter();
 
-//   const filtered = rooms.filter(
-//     (r) => r.name.toLowerCase().includes(q.toLowerCase()) || r.last.toLowerCase().includes(q.toLowerCase()),
-//   )
+  const handleLogout = async () => {
+    const res = await logout();
+
+    // Always clear localStorage even if API fails
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("user");
+
+    if (res.success) {
+      toast.success("Logged out successfully!");
+    } else {
+      toast.error(res.message || "Logout failed!");
+    }
+
+    router.push("/login");
+  };
+  //   const rooms = useMemo<Room[]>(
+  //     () => [
+  //       { id: "general", name: "General", last: "Theme ready. Ship chat next!", unread: 2 },
+  //       { id: "support", name: "Support", last: "Let us know if you need help." },
+  //       { id: "random", name: "Random", last: "Friday memes dropping soon." },
+  //     ],
+  //     [],
+  //   )
+  //   const [q, setQ] = useState("")
+
+  //   const filtered = rooms.filter(
+  //     (r) => r.name.toLowerCase().includes(q.toLowerCase()) || r.last.toLowerCase().includes(q.toLowerCase()),
+  //   )
 
   return (
     <div className="bg-transparent rounded-2xl border-[4px] border-[#30303D] p-3 sm:p-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-3 sm:mb-4">
         <h2 className="text-white font-poppins text-[18px] sm:text-[20px] md:text-[22px] font-bold">Chats</h2>
-        <Link
-          href="/register"
-          className="text-white/80 hover:text-white text-[12px] sm:text-[13px] md:text-[14px] underline"
+        <button
+          onClick={handleLogout}
+          className="text-white/80 hover:text-white text-[12px] sm:text-[13px] md:text-[14px] underline cursor-pointer"
         >
-          New here?
-        </Link>
+          LOGOUT
+        </button>
       </div>
 
       {/* Search */}
@@ -43,10 +63,10 @@ export function ChatSidebar() {
       </label>
       <input
         id="chat-search"
-        
-       
+
+
         placeholder="Search"
-        className="w-full h-[44px] rounded-[14px] border-[4px] border-[#30303D] bg-transparent text-white text-[14px] sm:text-[16px] md:text-[16px] px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+        className="w-full h-[44px] rounded-[14px] border-[4px] border-[#30303D] bg-transparent text-white text-[14px] sm:text-[16px] md:text-[16px] px-3 focus:outline-none focus:ring-2 focus:ring-pink-500 mb-3"
       />
 
       {/* Rooms */}

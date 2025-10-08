@@ -30,7 +30,7 @@ export function ChatInput() {
        
         
         placeholder="Type a message..."
-        className="flex-1 h-[48px] max-h-[140px] rounded-[14px] border-[4px] border-[#30303D] bg-transparent text-white text-[14px] sm:text-[16px] md:text-[16px] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+        className="flex-1 h-[48px] max-h-[140px] rounded-[14px] border-[4px] border-[#30303D] bg-transparent text-white text-[14px] sm:text-[16px] md:text-[16px] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
       />
       <button
        

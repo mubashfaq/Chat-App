@@ -14,12 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // ✅ Just register middleware - rate limiter defined in AppServiceProvider
-        $middleware->api(prepend: [
-            EnsureFrontendRequestsAreStateful::class,
-            'throttle:api',
-            SubstituteBindings::class,
+        
+        $middleware->validateCsrfTokens(except: [
+            'api/*', // Exclude all API routes from CSRF
         ]);
+       
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

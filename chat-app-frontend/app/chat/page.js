@@ -4,6 +4,7 @@ import { useMemo, useRef, useEffect, useState } from "react"
 import { ChatMessage } from "./components/ChatMessage"
 import { ChatInput } from "./components/ChatInput"
 import { ChatSidebar } from "./components/ChatSidebar"
+import { useRouter } from "next/navigation";
 
 // type Message = {
 //     id: string
@@ -13,6 +14,15 @@ import { ChatSidebar } from "./components/ChatSidebar"
 // }
 
 export default function ChatPage() {
+
+    const router = useRouter();
+
+    useEffect(() => {
+      const token = localStorage.getItem("auth_token");
+      if (!token) {
+        router.push("/login");
+      }
+    }, [router]);
     // const [activeChat, setActiveChat] = useState < string > ("general")
     // const messagesEndRef = useRef < HTMLDivElement > (null)
 
